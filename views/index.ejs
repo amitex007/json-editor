@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Config Editor</title>
+  <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-editor@2.6.1/dist/jsoneditor.min.css">
+</head>
+<body>
+  <h1>JSON Config Editor version template</h1>
+  <div id="editor"></div>
+  <button id="save">Save Config</button>
+
+  <script>
+    const schema = <%- schema %>;
+
+    const editor = new JSONEditor(document.getElementById('editor'), {
+      schema: schema
+    });
+
+    // Load the current config
+    fetch('/get-config')
+      .then(response => response.json())
+      .then(data => editor.setValue(data))
+      .catch(console.error);
+
+    // Save the configuration
+    document.getElementById('save').addEventListener('click', () => {
+      const configData = editor.getValue();
+
+      fetch('/save-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(configData)
+      })
+        .then(response => response.json())
+        .then(data => alert(data.message || 'Saved!'))
+        .catch(error => alert('Failed to save: ' + error.message));
+    });
+  </script>
+</body>
+</html>
