@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JSON Config Editor</title>
-  <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-editor@2.6.1/dist/jsoneditor.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.1/jsoneditor.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/10.1.1/jsoneditor.css">
 </head>
 <body>
   <h1>JSON Config Editor version template</h1>
@@ -22,12 +22,12 @@
     // Load the current config
     fetch('/get-config')
       .then(response => response.json())
-      .then(data => editor.setValue(data))
+      .then(data => editor.set(data))
       .catch(console.error);
 
     // Save the configuration
     document.getElementById('save').addEventListener('click', () => {
-      const configData = editor.getValue();
+      const configData = editor.get();
 
       fetch('/save-config', {
         method: 'POST',
