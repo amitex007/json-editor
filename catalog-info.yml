@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: json-editor
+  description: Json validator service
+  tags:
+    - json
+    - validators
+spec:
+  type: service
+  lifecycle: production
+  owner: platform-engineering
+  system: packages
