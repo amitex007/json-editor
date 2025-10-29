@@ -1,0 +1,6 @@
+site_name: JSON Validator
+nav:
+  - Home: README.md
+
+plugins:
+  - techdocs-core
