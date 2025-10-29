@@ -1,4 +1,5 @@
 site_name: JSON Validator
+docs_dir: .
 nav:
   - Home: index.md
 
